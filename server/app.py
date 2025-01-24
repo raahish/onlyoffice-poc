@@ -124,8 +124,8 @@ def get_document_config(project_id):
     if not doc_info:
         return jsonify({"status": "error", "message": "No doc found"}), 404
 
-    # Unique key for each session
-    doc_key = f"{doc_info['doc_id']}-{uuid.uuid4()}"
+    # Use a stable key based on project_id + version
+    doc_key = f"{doc_info['doc_id']}-v{doc_info['version']}"
 
     # Optional local link token
     link_payload = {"file_path": doc_info["file_path"]}
